@@ -1,0 +1,11 @@
+@mixin alignment($justify-center, $align-center, $direction) {
+  display: flex;
+  justify-content: $justify-center;
+  align-items: $align-center;
+  flex-direction: $direction;
+}
+
+@mixin font-size($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}

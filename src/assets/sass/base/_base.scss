@@ -1,0 +1,10 @@
+html {
+  font-size: 10px;
+  scroll-behavior: smooth;
+
+  body {
+    background-color: $main-background-color;
+    @extend %font;
+    @include font-size(1.6rem, 400);
+  }
+}

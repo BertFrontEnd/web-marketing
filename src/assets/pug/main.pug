@@ -1,0 +1,114 @@
+- let innerDataset = require("../dataset.json")
+- let randomNumber = function randomInteger(min, max) { let rand = min - 0.5 + Math.random() * (max - min + 1); return Math.round(rand);}
+- let p_01 = 1;
+- let p_02 = 1;
+
+main.main
+  section.main__wrapper.wrapper
+    .main__breadcrumbs
+      ul
+        li
+          a(href=innerDataset.breadcrumbs[0].href)= innerDataset.breadcrumbs[0].text
+        li
+          a(href=innerDataset.breadcrumbs[1].href)= innerDataset.breadcrumbs[1].text
+        li
+          a(href=innerDataset.breadcrumbs[2].href).current-breadcrumb= innerDataset.breadcrumbs[2].text
+    .main__level
+        h1= innerDataset.page_meta.h1
+    .main__description
+      form.description__results
+        h2.results__title 26 Result Found
+        .result__checkbox
+          p.checkbox Modification
+          span.arrow
+        .result__box
+          label CF Electric
+            input(type="checkbox")
+            span.checkbox
+          label LF Electric
+            input(type="checkbox")
+            span.checkbox
+          label XF
+            input(type="checkbox" checked)
+            span.checkbox
+          label CF
+            input(type="checkbox" checked)
+            span.checkbox
+          label LF
+            input(type="checkbox")
+            span.checkbox
+        .result__radio
+          p.radio Currency
+          span.arrow
+        .result__box
+          label RUB
+            input(type="radio" name="value")
+            span.radio
+          label USD
+            input(type="radio" name="value")
+            span.radio
+          label EUR
+            input(type="radio" name="value" checked)
+            span.radio
+        .result__minmax
+          p.minmax Year
+          span.arrow
+        .result__input-box
+          input(type="text", placeholder="min")
+          input(type="text", placeholder="max")
+        .result__keyword
+          p.result Request
+          span.arrow
+        .result__box
+          input(type="text", placeholder="Keyword")
+        input(type="submit", value="Search")
+      aside.description__pages
+        .pages__navigation
+          .navigation__counter
+            ul
+              li.arrow-left= '<'
+              li.item-page 1
+              li.item-page.current 2
+              li.arrow-right.disabled= '>'
+          .navigation__sort
+            span.sort__title Sort by
+            select.sort__area
+              option.area__title(title="default") Sort option
+              option A-Z
+              option Z-A
+            span.sort__arrow
+        .pages__results
+          each el in innerDataset.stock
+            .results__item
+              .item__img
+                img(src="../assets/images/" + el.image, alt="image")
+              .item__info
+                a.info__title(href=el.href) #{el.title}
+                #{innerDataset.page_text[randomNumber(0,2)].tag}.info__text #{innerDataset.page_text[randomNumber(0,2)].content}
+                  .info__configuration
+                    span.configuration__year #{el.year}
+                    .configuration__mileage
+                      span.mileage #{el.mileage}
+                      span.measure #{el.mileage_measure}
+                    span.configuration__axle-configuration #{el.axle_configuration}
+              .item__coast
+                span.currency #{el.price_currency}
+                span.price #{el.price}
+        .pages__navigation
+          .navigation__counter
+            ul
+              li.arrow-left= '<'
+              li.item-page 1
+              li.item-page.current 2
+              li.arrow-right.disabled= '>'
+          .navigation__sort
+            span.sort__title Sort by
+            select.sort__area
+              option.area__title(title="default") Sort option
+              option A-Z
+              option Z-A
+            span.sort__arrow
+        .pages__text
+          #{innerDataset.page_text[0].tag}.text__content #{innerDataset.page_text[0].content}
+          #{innerDataset.page_text[1].tag}.text__content!= innerDataset.page_text[1].content.split(" ").slice(0, 20).join(" ") + " " + '<a href="#" class="inner-link">' + innerDataset.page_text[1].content.split(" ").slice(20,21).join(" ") + '</a>' + " " + innerDataset.page_text[1].content.split(" ").slice(22).join(" ")
+          #{innerDataset.page_text[2].tag}.text__content #{innerDataset.page_text[2].content}

@@ -1,0 +1,35 @@
+.header {
+  padding-top: 40px;
+
+  .header__wrapper {
+    .header__logo {
+      @include alignment(flex-start, center, row);
+      height: 100px;
+      margin-bottom: 20px;
+      padding: 40px 16px;
+      @include font-size(1.8rem, 700);
+      background-color: $block-background-color;
+    }
+
+    .header__nav {
+      ul {
+        @include alignment(flex-start, center, row);
+        column-gap: 32px;
+        padding: 15px 16px;
+        background-color: $block-background-color;
+
+        a {
+          height: 50px;
+          text-decoration: none;
+          text-transform: uppercase;
+          color: $navigation-text-color;
+          @extend %transition;
+
+          &:hover {
+            color: $hover-link-text-color;
+          }
+        }
+      }
+    }
+  }
+}

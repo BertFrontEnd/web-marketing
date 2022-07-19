@@ -1,0 +1,17 @@
+- let innerDataset = require("./assets/dataset.json")
+
+doctype html
+html(lang='en')
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="keywords" content= innerDataset['page_meta']['meta_keywords'])
+    meta(name="description" content= innerDataset['page_meta']['meta_description'])
+    link(rel="icon" href="./assets/favicon.svg")
+    link(rel="stylesheets" href="./assets/fonts.css")
+    title= innerDataset['page_meta']['title']
+  body
+    include ./assets/pug/header.pug
+    include ./assets/pug/main.pug
+    include ./assets/pug/footer.pug
