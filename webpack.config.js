@@ -27,7 +27,7 @@ module.exports = ({ development }) => ({
   output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'images/[name][ext]',
+    assetModuleFilename: 'assets/icons/[name][ext]',
   },
 
   module: {
@@ -54,16 +54,16 @@ module.exports = ({ development }) => ({
           'sass-loader',
         ],
       },
-      { test: /\.(pug|jade)$/, loader: 'pug-loader' },
+      {
+        test: /\.(pug|jade)$/,
+        loader: 'pug-loader',
+      },
     ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.pug',
-      /* data: {
-        dataset: require('./src/assets/dataset.json'),
-      }, */
     }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new CopyPlugin({

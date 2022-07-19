@@ -1,4 +1,6 @@
 - let innerDataset = require("./assets/dataset.json")
+- let randomNumber = function randomInteger(min, max) { let rand = min - 0.5 + Math.random() * (max - min + 1); return Math.round(rand);}
+- let socialIconsNames = ["facebook", "instagram", "twitter", "youtube"]
 
 doctype html
 html(lang='en')
@@ -6,12 +8,147 @@ html(lang='en')
     meta(charset="UTF-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    meta(name="keywords" content= innerDataset['page_meta']['meta_keywords'])
-    meta(name="description" content= innerDataset['page_meta']['meta_description'])
+    meta(name="description" content= innerDataset.page_meta.meta_description)
+    meta(name="keywords" content= innerDataset.page_meta.meta_keywords)
     link(rel="icon" href="./assets/favicon.svg")
     link(rel="stylesheets" href="./assets/fonts.css")
-    title= innerDataset['page_meta']['title']
+    title= innerDataset.page_meta.title
   body
-    include ./assets/pug/header.pug
-    include ./assets/pug/main.pug
-    include ./assets/pug/footer.pug
+    header.header
+      section.header__wrapper.wrapper
+        h1.header__logo= "Header/Logo"
+        nav.header__nav
+          ul
+            each el in innerDataset.nav
+              li
+                a(href=el.href)= el.text
+    main.main
+      section.main__wrapper.wrapper
+        .main__breadcrumbs
+          ul
+            li
+              a(href=innerDataset.breadcrumbs[0].href)= innerDataset.breadcrumbs[0].text
+            li
+              a(href=innerDataset.breadcrumbs[1].href)= innerDataset.breadcrumbs[1].text
+            li
+              a(href=innerDataset.breadcrumbs[2].href).current-breadcrumb= innerDataset.breadcrumbs[2].text
+        .main__level
+            h1= innerDataset.page_meta.h1
+        .main__description
+          form.description__results
+            h2.results__title 26 Result Found
+            .result__checkbox
+              p.checkbox Modification
+              span.arrow
+            .result__box
+              label CF Electric
+                input(type="checkbox")
+                span.checkbox
+              label LF Electric
+                input(type="checkbox")
+                span.checkbox
+              label XF
+                input(type="checkbox" checked)
+                span.checkbox
+              label CF
+                input(type="checkbox" checked)
+                span.checkbox
+              label LF
+                input(type="checkbox")
+                span.checkbox
+            .result__radio
+              p.radio Currency
+              span.arrow
+            .result__box
+              label RUB
+                input(type="radio" name="value")
+                span.radio
+              label USD
+                input(type="radio" name="value")
+                span.radio
+              label EUR
+                input(type="radio" name="value" checked)
+                span.radio
+            .result__minmax
+              p.minmax Year
+              span.arrow
+            .result__input-box
+              input(type="text", placeholder="min")
+              input(type="text", placeholder="max")
+            .result__keyword
+              p.result Request
+              span.arrow
+            .result__box
+              input(type="text", placeholder="Keyword")
+            input(type="submit", value="Search")
+          aside.description__pages
+            .pages__navigation
+              .navigation__counter
+                ul
+                  li.arrow-left= '<'
+                  li.item-page 1
+                  li.item-page.current 2
+                  li.arrow-right.disabled= '>'
+              .navigation__sort
+                span.sort__title Sort by
+                select.sort__area
+                  option.area__title(title="default") Sort option
+                  option A-Z
+                  option Z-A
+                span.sort__arrow
+            .pages__results
+              each el in innerDataset.stock
+                .results__item
+                  .item__img
+                    img(src="./assets/images/" + el.image, alt="image")
+                  .item__info
+                    a.info__title(href=el.href) #{el.title}
+                    #{innerDataset.page_text[randomNumber(0,2)].tag}.info__text #{innerDataset.page_text[randomNumber(0,2)].content}
+                      .info__configuration
+                        span.configuration__year #{el.year}
+                        .configuration__mileage
+                          span.mileage #{el.mileage}
+                          span.measure #{el.mileage_measure}
+                        span.configuration__axle-configuration #{el.axle_configuration}
+                  .item__coast
+                    span.currency #{el.price_currency}
+                    span.price #{el.price}
+            .pages__navigation
+              .navigation__counter
+                ul
+                  li.arrow-left= '<'
+                  li.item-page 1
+                  li.item-page.current 2
+                  li.arrow-right.disabled= '>'
+              .navigation__sort
+                span.sort__title Sort by
+                select.sort__area
+                  option.area__title(title="default") Sort option
+                  option A-Z
+                  option Z-A
+                span.sort__arrow
+            .pages__text
+              #{innerDataset.page_text[0].tag}.text__content #{innerDataset.page_text[0].content}
+              #{innerDataset.page_text[1].tag}.text__content!= innerDataset.page_text[1].content.split(" ").slice(0, 20).join(" ") + " " + '<a href="#" class="inner-link">' + innerDataset.page_text[1].content.split(" ").slice(20,21).join(" ") + '</a>' + " " + innerDataset.page_text[1].content.split(" ").slice(22).join(" ")
+              #{innerDataset.page_text[2].tag}.text__content #{innerDataset.page_text[2].content}
+    footer.footer
+      section.footer__wrapper.wrapper
+        .footer__contact
+          h3.contact__logo Logo / Company Name
+          address.contact__address
+            .address__info
+              p.info__location= "Company Address: "
+                a.location__link(href="https://www.google.ru/maps/place/%D0%9D%D0%B8%D0%B4%D0%B5%D1%80%D0%BB%D0%B0%D0%BD%D0%B4%D1%8B/@52.2093654,4.1584377,8z/data=!3m1!4b1!4m5!3m4!1s0x47c609c3db87e4bb:0xb3a175ceffbd0a9f!8m2!3d52.132633!4d5.291266", target="_blank") Lorem ipsum dolor sit amet 18600, Netherlands
+              a.info__phone(href="tel:+389587550000") +38 958 755-00-00
+            .address__text
+              p.text__content Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet quos ullam atque accusantium ratione molestias soluta, provident nobis, assumenda dolorum voluptas incidunt inventore quia reiciendis quis. Quis quo molestias repellat.
+          ul.contact__social
+            each val in socialIconsNames
+              li
+                a(href="#" class="social__icon", class= val)
+        .footer__copyright
+          span.copyright__icon!= "&#169;&nbsp;"
+          span.copyright__year!= "2019 -&nbsp;"
+          a.copyright__link-first(href="#") Privacy Policy
+          span.copyright__separator!= "&nbsp;-&nbsp;"
+          a.copyright__link-second(href="#") Terms and Conditions

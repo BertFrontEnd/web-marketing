@@ -1,6 +1,3 @@
-*.*~
-*[-\.]lock.json
-
 .vscode
 .vs
 .idea
@@ -27,6 +24,3 @@ node_modules/
 
 # Optional eslint cache
 .eslintcache
-
-# Build results
-dist
